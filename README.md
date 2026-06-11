@@ -30,8 +30,9 @@ DeviceModelRoleCampus-RouterCisco 2911Inter-VLAN routing, DHCP, ACLs, SSHCore-Sw
 
 
 🔀 VLAN Design
-
+```
 VLAN IDNameSubnetGatewayDevices10Admin192.168.10.0/24192.168.10.1PC-admin1, PC-admin220Student-Lab192.168.20.0/24192.168.20.1PC-lab1, PC-lab2, PC-lab330Library192.168.30.0/24192.168.30.1PC-lib1, PC-lib240Server-Room192.168.40.0/24192.168.40.1Server0
+```
 
 All VLANs are configured on Core-Switch with trunk uplinks to the router and individual access switches.
 
@@ -39,7 +40,7 @@ All VLANs are configured on Core-Switch with trunk uplinks to the router and ind
 🔁 Inter-VLAN Routing — Router-on-a-Stick
 
 The router uses 802.1Q sub-interfaces on a single physical interface (Gi0/0) to route between all VLANs:
-
+```
 interface GigabitEthernet0/0.10
  encapsulation dot1Q 10
  ip address 192.168.10.1 255.255.255.0
@@ -55,7 +56,7 @@ interface GigabitEthernet0/0.30
 interface GigabitEthernet0/0.40
  encapsulation dot1Q 40
  ip address 192.168.40.1 255.255.255.0
-
+```
 
 📡 DHCP Configuration
 
@@ -69,7 +70,7 @@ Policy Design
 SourceDestinationActionReasonLab (20.x)Admin (10.x)❌ DENYProtect admin systems from studentsLibrary (30.x)Admin (10.x)❌ DENYProtect admin systems from studentsLab (20.x)Server (40.x)✅ PERMITStudents need server resourcesLibrary (30.x)Server (40.x)✅ PERMITStudents need server resourcesAdmin (10.x)All✅ PERMITIT staff need full access
 
 ACL Implementation
-
+```
 ip access-list extended BLOCK_LAB_TO_ADMIN
  deny ip 192.168.20.0 0.0.0.255 192.168.10.0 0.0.0.255
  deny ip 192.168.10.0 0.0.0.255 192.168.20.0 0.0.0.255
@@ -86,14 +87,13 @@ ip access-list extended BLOCK_LIB_TO_ADMIN
 interface GigabitEthernet0/0.30
  ip access-group BLOCK_LIB_TO_ADMIN in
 
-
-Note: Initial testing revealed that the first ACL allowed return traffic from Admin back to Lab due to ARP resolution. This was identified through live traffic analysis and corrected by adding a deny rule for the return direction — demonstrating real-world ACL troubleshooting.
+```
 
 
 
 
 🔐 Router Security Hardening
-
+```
 ! Encrypted enable password
 enable secret Cisco@Campus1
 
@@ -121,7 +121,7 @@ service password-encryption
 
 ! Login banner
 banner motd # Authorized access only. All activity is monitored. #
-
+```
 
 ✅ Verification Results
 
@@ -169,10 +169,11 @@ smart-campus-network/
 
 
 🛠️ Skills Demonstrated
-
+``
 VLANs 802.1Q Trunking Router-on-a-Stick Inter-VLAN Routing DHCP
 Named Extended ACLs SSH Telnet Blocking Password Encryption
 Cisco IOS Cisco Packet Tracer Network Security Network Troubleshooting
+```
 
 
 📚 What I Learned
