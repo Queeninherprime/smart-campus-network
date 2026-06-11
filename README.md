@@ -156,16 +156,9 @@ SSH Verification
 
 smart-campus-network/
 ├── README.md
-├── smart-campus-network.pkt        ← Packet Tracer file
+├      
 |
-└── screenshots/
-    ├── topology-overview.png
-    ├── inter-vlan-ping-success.png
-    ├── acl-lab-blocked-from-admin.png
-    ├── acl-lab-reaches-server.png
-    ├── show-access-lists.png
-    ├── show-ip-ssh.png
-    └── show-running-config.png
+└── screenshots
 
 
 🛠️ Skills Demonstrated
